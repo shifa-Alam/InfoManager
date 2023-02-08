@@ -12,7 +12,7 @@ export interface memberFormGroup {
   name: FormControl<string>;
   countryId: FormControl<number>;
   cityId: FormControl<number>;
-  dateOfBirth?: FormControl<any>;//? makes controls as optional
+  dateOfBirth: FormControl<any>;//? makes controls as optional
 }
 @Component({
   selector: 'app-member-add',
@@ -28,7 +28,9 @@ export class MemberAddComponent implements OnInit {
   cities: City[] = [];
   skills: Skill[] = [];
   dummySkill: Skill[] = [];
+  selectedCountryId: number = 0;
   selectedFile: any;
+
   constructor(
     public service: MemberService,
     public fb: FormBuilder,
@@ -41,7 +43,7 @@ export class MemberAddComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCountries();
-    this.getCities();
+
     this.getSkills();
     this.dialogRef.updateSize('75%')
     this.createMemberForm();
@@ -49,24 +51,17 @@ export class MemberAddComponent implements OnInit {
   }
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.member.resume= window.URL.createObjectURL(this.selectedFile) as string;
-    // this.convertFile(event.target.files[0]).subscribe(base64 => {
-    //   this.member.resume = base64;
-    // });
+    this.member.resume = window.URL.createObjectURL(this.selectedFile) as string;
+
   }
-  // convertFile(file : File) : Observable<string> {
-  //   const result = new ReplaySubject<string>(1);
-  //   const reader = new FileReader();
-  //   reader.readAsBinaryString(file);
-  //   reader.onload = (event) => result.next(btoa(event.target.result.toString()));
-  //   return result;
-  // }
+
   createMemberForm() {
     this.memberForm = new FormGroup<memberFormGroup>({
       name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
       countryId: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
       cityId: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
-      dateOfBirth: new FormControl<any>('')
+      dateOfBirth: new FormControl<any>('', { nonNullable: true, validators: [Validators.required] }),
+      // skills: new FormControl<any>('',{ nonNullable: true, validators: [Validators.required] })
     });
   }
   setValue() {
@@ -79,15 +74,11 @@ export class MemberAddComponent implements OnInit {
       })
     }
   }
-  handleFileInput() {
-    // this.fileToUpload = files.item(0);
-    // this.member.resume=this.fileToUpload?.toString();
-  }
+
   cancel() {
     this.dialogRef.close();
   }
   submit() {
-    console.log(this.memberForm);
     this.member.name = this.memberForm.value.name as string;
     this.member.cityId = this.memberForm.value.cityId as number;
     this.member.countryId = this.memberForm.value.countryId as number;
@@ -101,17 +92,18 @@ export class MemberAddComponent implements OnInit {
         error => console.error(error));
 
     } else {
-
       this.service.saveMember(this.member).subscribe(result => {
         this.dialogRef.close();
       },
         error => console.error(error));
 
-
     }
 
   }
-
+  onCountrySelect(e: any) {
+    if (e.value)
+      this.getCities(e.value);
+  }
 
   getCountries() {
     this.isLoading = true;
@@ -169,9 +161,9 @@ export class MemberAddComponent implements OnInit {
 
   }
 
-  getCities() {
+  getCities(countryId: number) {
     this.isLoading = true;
-    this.service.getCities().subscribe(result => {
+    this.service.getCities(countryId).subscribe(result => {
       this.cities = result;
       this.isLoading = false;
     },

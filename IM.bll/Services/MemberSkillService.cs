@@ -90,12 +90,32 @@ namespace IM.bll.Services
         }
 
 
+        public void OnMemberDelete(Member member)
+        {
+            try
+            {
+                if (member is null)
+                {
+                    throw new ArgumentNullException(nameof(member));
+                }
 
+                foreach (var memberSkill in member.MemberSkills)
+                {
+                    memberSkill.Active = false;
+                    memberSkill.ModifiedDate = member.ModifiedDate;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public override void Dispose()
         {
             _repo?.Dispose();
         }
 
-      
+       
     }
 }

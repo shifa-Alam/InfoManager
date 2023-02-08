@@ -15,6 +15,7 @@ namespace IM.Core.Services
         public City SoftDelete(City entity);
         public City FindById(long id);
         public IEnumerable<City> Get();
-        
+        public IEnumerable<City> GetByCountryId(long countryId);
+
     }
 }

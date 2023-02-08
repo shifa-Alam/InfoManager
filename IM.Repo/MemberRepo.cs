@@ -19,7 +19,7 @@ namespace IM.Repo
 
         public IEnumerable<Member> GetWithChild()
         {
-            return context.Members
+            return context.Members.Where(e=>e.Active)
                  .Include(z => z.Country)
                  .Include(c => c.City)
                  .Include(e => e.MemberSkills).ThenInclude(x => x.Skill);

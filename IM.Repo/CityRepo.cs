@@ -1,6 +1,7 @@
 ﻿using IM.Core.Entities;
 using IM.Core.Infra.Repos;
 using IM.Repo.DBContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace IM.Repo
     {
         public CityRepo(IMDBContext context) : base(context)
         {
+        }
+
+        public IEnumerable<City> GetByCountryId(long countryId)
+        {
+            return context.Cities.Where(e => e.CountryId == countryId);
         }
     }
 }

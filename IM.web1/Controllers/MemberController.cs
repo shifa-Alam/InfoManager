@@ -1,10 +1,10 @@
 ﻿
 using AutoMapper;
-using IM.Core.Entities;
 using IM.Core.Models;
 using IM.Core.Services;
-using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Mvc;
+using Member = IM.Core.Entities.Member;
 
 namespace IM.web1.Controllers
 {
@@ -41,28 +41,6 @@ namespace IM.web1.Controllers
 
             var mappedData = _mapper.Map<Member>(memberIn);
 
-            //_memberService.Save(mappedData);
-            //List<MemberSkill> skills = new List<MemberSkill>();
-
-            //foreach (var item in memberIn.MemberSkills)
-            //{
-            //    var skill = new MemberSkill
-            //    {
-            //        SkillId = item.SkillId
-            //    };
-            //    skills.Add(skill);
-            //}
-
-            //var member = new Member
-            //{
-            //    Name = memberIn.Name,
-            //    CountryId = memberIn.CountryId,
-            //    CityId = memberIn.CityId,
-            //    DateOfBirth = memberIn.DateOfBirth,
-            //    CreatedDate = DateTime.Now,
-            //    MemberSkills = skills
-            //};
-
             _memberService.SaveWithSkills(mappedData);
             return Ok();
         }
@@ -70,7 +48,6 @@ namespace IM.web1.Controllers
         [Route("UpdateMember")]
         public IActionResult UpdateMember(MemberInputModel memberIn)
         {
-
             var mappedData = _mapper.Map<Member>(memberIn);
 
             _memberService.Update(mappedData);
@@ -116,10 +93,10 @@ namespace IM.web1.Controllers
 
 
         [HttpGet]
-        [Route("GetCities")]
-        public IActionResult GetCities()
+        [Route("GetCities/{countryId}")]
+        public IActionResult GetCities(long countryId)
         {
-            var cities = _cityService.Get();
+            var cities = _cityService.GetByCountryId(countryId);
 
             return Ok(cities);
 

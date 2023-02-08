@@ -16,6 +16,6 @@ namespace IM.Core.Services
         public MemberSkill SoftDelete(MemberSkill entity);
         public MemberSkill FindById(long id);
         public IEnumerable<MemberSkill> Get();
-      
+        void OnMemberDelete(Member member);
     }
 }

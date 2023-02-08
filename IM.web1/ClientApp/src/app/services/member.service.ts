@@ -18,8 +18,8 @@ export class MemberService extends BaseService {
   public getMember(): Observable<any> {
     return super.getRequest(subUrl + "GetMembers");
   }
-  public getCities(): Observable<any> {
-    return super.getRequest(subUrl + "GetCities");
+  public getCities(countryId: number): Observable<any> {
+    return super.getRequest(subUrl + `GetCities/${countryId}`);
   }
   public getCountries(): Observable<any> {
     return super.getRequest(subUrl + "GetCountries");
@@ -27,7 +27,7 @@ export class MemberService extends BaseService {
   public getSkills(): Observable<any> {
     return super.getRequest(subUrl + "GetSkills");
   }
-  
+
   saveMember(member: Member): Observable<any> {
     return super.postRequest(subUrl + "SaveMember", member);
   }

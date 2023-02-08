@@ -8,7 +8,7 @@
     <div class="col-4">
       <mat-form-field appearance="fill">
         <mat-label>Country</mat-label>
-        <mat-select formControlName="countryId" name="country">
+        <mat-select formControlName="countryId" name="country" (selectionChange)="onCountrySelect($event)">
           <mat-option *ngFor="let country of countries" [value]="country.id">
             {{country.name}}
           </mat-option>
@@ -63,6 +63,6 @@
   <div class="button-wrapper" align="end">
 
     <button mat-flat-button color="warn" (click)="cancel()">Cancel</button> &nbsp;
-    <button mat-flat-button color="primary" (click)="submit()" [disabled]="memberForm.invalid">Submit</button>
+    <button mat-flat-button color="primary" (click)="submit()" [disabled]="memberForm.invalid || member.dateOfBirth=='' || member.memberSkills.length==0">Submit</button>
   </div>
 </form>

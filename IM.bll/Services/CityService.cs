@@ -73,6 +73,9 @@ namespace IM.bll.Services
             _repo?.Dispose();
         }
 
-        
+        public IEnumerable<City> GetByCountryId(long countryId)
+        {
+            return _repo.CityR.GetByCountryId(countryId);
+        }
     }
 }

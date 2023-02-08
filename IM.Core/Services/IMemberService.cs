@@ -13,7 +13,7 @@ namespace IM.Core.Services
         public void SaveWithSkills(Member entity);
         public void Update(Member entity);
         public void DeleteById(long id);
-        public Member SoftDelete(Member entity);
+        public void SoftDelete(Member entity);
         public Member FindById(long id);
         public IEnumerable<Member> Get();
         

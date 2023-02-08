@@ -50,12 +50,24 @@ namespace IM.bll.Services
         public void DeleteById(long id)
         {
             var member = _repo.MemberR.GetById(id);
-            _repo.MemberR.Remove(member);
-            _repo.Save();
+            
+            SoftDelete(member);
+
+            //_repo.MemberR.Remove(member);
+            //_repo.Save();
         }
-        public Member SoftDelete(Member member)
+        public void SoftDelete(Member member)
         {
-            return member;
+            var existingEntity = _repo.MemberR.GetById(member.Id);
+
+            if (existingEntity != null)
+            {
+                existingEntity.Active = false;
+                existingEntity.ModifiedDate = DateTime.Now;
+                _memberSkillService.OnMemberDelete(member);
+                _repo.MemberR.Update(existingEntity);
+                _repo.Save();
+            }
         }
 
         public Member FindById(long id)
@@ -75,6 +87,6 @@ namespace IM.bll.Services
             _repo?.Dispose();
         }
 
-
+        
     }
 }

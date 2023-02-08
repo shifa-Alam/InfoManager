@@ -9,5 +9,6 @@ namespace IM.Core.Infra.Repos
 {
     public interface ICityRepo : IGenericRepository<City>
     {
+        IEnumerable<City> GetByCountryId(long countryId);
     }
 }
