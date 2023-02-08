@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MemberAddComponent } from '../member-add/member-add.component';
+import { MemberDetailsComponent } from '../member-details/member-details.component';
 import { Member } from '../Models/member';
 import { MemberService } from '../services/member.service';
 
@@ -51,6 +52,19 @@ export class MemberLandingComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.getMembers();
+    });
+
+  }
+  details(member: any) {
+    const dialogRef = this.dialog.open(MemberDetailsComponent, {
+      position: { top: '100px' },
+      data: {
+        member: member
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // this.getMembers();
     });
 
   }

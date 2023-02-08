@@ -42,10 +42,11 @@ export class MemberAddComponent implements OnInit {
     Object.assign(this.member, data.member);
   }
   ngOnInit(): void {
+    this.dialogRef.updateSize('75%')
     this.getCountries();
 
     this.getSkills();
-    this.dialogRef.updateSize('75%')
+    
     this.createMemberForm();
     this.setValue();
   }
