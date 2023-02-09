@@ -45,7 +45,7 @@ export class MemberAddComponent implements OnInit {
     this.dialogRef.updateSize('75%')
     this.getCountries();
     this.getSkills();
-    
+
     if (this.member.id) {
       this.getCities(this.member.countryId);
     }
@@ -136,6 +136,7 @@ export class MemberAddComponent implements OnInit {
 
   memberSkillUpdate() {
     if (this.member.id == 0) {
+      
       this.skills.forEach(element => {
         var memberSkill: MemberSkill = new MemberSkill();
         memberSkill.skillId = element.id;
@@ -150,16 +151,16 @@ export class MemberAddComponent implements OnInit {
         } else {
           this.dummySkill.push(e);
         }
-        this.dummySkill.forEach(element => {
-          var memberSkill = new MemberSkill();
-          memberSkill.skillId = element.id;
-          memberSkill.skillName = element.name;
-          memberSkill.isSelect = false;
-          this.member.memberSkills.push(memberSkill);
-        });
+       
       });
 
-
+      this.dummySkill.forEach(element => {
+        var memberSkill = new MemberSkill();
+        memberSkill.skillId = element.id;
+        memberSkill.skillName = element.name;
+        memberSkill.isSelect = false;
+        this.member.memberSkills.push(memberSkill);
+      });
     }
 
   }

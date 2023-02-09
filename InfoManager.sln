@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IM.bll", "IM.bll\IM.bll.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IM.Core", "IM.Core\IM.Core.csproj", "{3DBA8E67-2CF3-4077-AC56-8F79E4F1ADA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IM.web1", "IM.web1\IM.web1.csproj", "{E3E578A7-51CB-4A8C-AAB6-E5AE3D660187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IM.web", "IM.web1\IM.web.csproj", "{E3E578A7-51CB-4A8C-AAB6-E5AE3D660187}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
