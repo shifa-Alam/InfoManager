@@ -1,8 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -11,13 +8,12 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MemberLandingComponent } from './member-landing/member-landing.component';
 import { MemberAddComponent } from './member-add/member-add.component';
 import { MemberDetailsComponent } from './member-details/member-details.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 
 //Angular Material Components
 
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -49,7 +45,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { DatePipe } from '@angular/common';
+import { DatePipe, HashLocationStrategy } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -76,7 +77,9 @@ import { DatePipe } from '@angular/common';
       { path: 'members', component: MemberLandingComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-    ]),
+    ], { useHash: true }),
+
+    
     BrowserAnimationsModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -119,7 +122,7 @@ import { DatePipe } from '@angular/common';
 
     //Meterial
 
-    
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
