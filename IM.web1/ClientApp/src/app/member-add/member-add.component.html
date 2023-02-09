@@ -8,12 +8,19 @@
     <form [formGroup]="memberForm">
       <div class="row">
         <div class="col-4">
-          <mat-form-field class="example-full-width">
+          <!-- <mat-form-field class="example-full-width">
             <input matInput placeholder="Name" formControlName="name" />
+          </mat-form-field> -->
+
+
+          <mat-form-field appearance="outline"class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name">
           </mat-form-field>
+
         </div>
         <div class="col-4">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline"class="example-full-width" >
             <mat-label>Country</mat-label>
             <mat-select formControlName="countryId" name="country" (selectionChange)="onCountrySelect($event)">
               <mat-option *ngFor="let country of countries" [value]="country.id">
@@ -23,7 +30,7 @@
           </mat-form-field>
         </div>
         <div class="col-4">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline"class="example-full-width">
             <mat-label>City</mat-label>
             <mat-select formControlName="cityId" name="city">
               <mat-option *ngFor="let city of cities" [value]="city.id">
@@ -33,21 +40,34 @@
           </mat-form-field>
         </div>
       </div>
-    
-      <div class="row">
+
+      <!-- <div class="row">
         <div class="col-12">
           <mat-label>Language Skills</mat-label>
-          <div *ngFor="let skill of member.memberSkills; let i = index;">
-            <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="skill.isSelect" name="something{{i}}"
-              class="something{{i}}" [checked]="skill.isSelect" [value]="skill.id"> {{skill.skillName}}
+          <div>
+            <span *ngFor="let skill of member.memberSkills; let i = index;">
+              <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="skill.isSelect"
+                name="something{{i}}" class="something{{i}}" [checked]="skill.isSelect" [value]="skill.id">
+              {{skill.skillName}}
+            </span>
           </div>
         </div>
-    
-      </div>
+
+      </div> -->
       <div class="row">
-        <div class="col-6">
-    
-          <mat-form-field class="example-full-width">
+        <div class="col-4">
+          <mat-label>Language Skills</mat-label>
+          <div>
+            <span *ngFor="let skill of member.memberSkills; let i = index;">
+              <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="skill.isSelect"
+                name="something{{i}}" class="something{{i}}" [checked]="skill.isSelect" [value]="skill.id">
+              {{skill.skillName}}
+            </span>
+          </div>
+        </div>
+        <div class="col-4">
+
+          <mat-form-field class="example-full-width"appearance="outline">
             <mat-label>Date Of Birth</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
             <mat-hint>MM/DD/YYYY</mat-hint>
@@ -55,8 +75,7 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="col-6">
-    
+        <div class="col-4">
           <div class="form-group row">
             <label for="motherName" class="col-sm-2 col-form-label">Resume:</label>
             <div class="col-sm-8">
@@ -66,9 +85,9 @@
           </div>
         </div>
       </div>
-    
+
       <div class="button-wrapper" align="end">
-    
+
         <button mat-flat-button color="warn" (click)="cancel()">Cancel</button> &nbsp;
         <button mat-flat-button color="primary" (click)="submit()"
           [disabled]="memberForm.invalid || member.dateOfBirth=='' || member.memberSkills.length==0">Submit</button>
